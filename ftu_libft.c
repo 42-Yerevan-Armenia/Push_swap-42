@@ -15,6 +15,25 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size > 0)
+	{
+		while (src[i] && i < (size - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = 0;
+	}
+	while (src[i])
+		i++;
+	return (i);
+}
+
 int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 {
 	size_t	i;

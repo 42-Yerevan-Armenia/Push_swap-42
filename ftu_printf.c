@@ -57,11 +57,11 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-int	ft_atoi(const char *str)
+long long int	ft_atoi(const char *str)
 {
 	int	i;
 	int	j;
-	int	res;
+	long long int	res;
 
 	i = 0;
 	j = 1;
@@ -81,4 +81,22 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (res * j);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
+	if (!str)
+		return (0);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }
