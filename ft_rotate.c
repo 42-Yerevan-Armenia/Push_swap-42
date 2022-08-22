@@ -11,43 +11,50 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-// queue top of stack - shift remaining values up the stack
-static void	rot_stk_top_to_botm(t_val *stk, size_t top)
-{
-	t_val	upper;
 
-	upper = stk[top];
-	while (top > 0)
+static void	ft_for_rotate(t_all **stk)
+{
+	t_all	*i;
+
+	i = (*stk);
+	if (stk)
 	{
-		stk[top] = stk[top - 1];
-		top--;
+		ft_lstlast(*stk)->next = i;
+		*stk = (*stk)->next;
+		i->next = NULL;
 	}
-	stk[0] = upper;
 }
 
-void	ra(t_all *all)
+void	ra(t_all **a, int t)
 {
-	if (all->a.load >= 2)
-		rot_stk_top_to_botm(all->a.stk, TOP_A);
+	ft_for_rotate(a);
+	if (t == 1)
+		ft_printf("ra\n");
 }
 
-void	rb(t_all *all)
+void	rb(t_all **b, int t)
 {
-	if (all->b.load >= 2)
-		rot_stk_top_to_botm(all->b.stk, TOP_B);
+	ft_for_rotate(b);
+	if (t == 1)
+		ft_printf("rb\n");
 }
 
-void	rr(t_all *all)
+void	rr(t_all **a, t_all **b, int t)
 {
-	ra(all);
-	rb(all);
+	ft_for_rotate(a);
+	ft_for_rotate(b);
+	if (t == 1)
+		ft_printf("rr\n");
 }
 
-void	ft_swap(t_val *a, t_val *b)
+void	ft_for_swap(t_all **swap)
 {
-	t_val	i;
+	int	i;
 
-	i = *a;
-	*a = *b;
-	*b = i;
+	if (swap)
+	{
+		i = (*swap)->info;
+		(*swap)->info = (*swap)->next->info;
+		(*swap)->next->info = i;
+	}
 }

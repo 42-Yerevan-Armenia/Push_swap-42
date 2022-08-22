@@ -59,8 +59,8 @@ char	*ft_itoa(int n)
 
 long long int	ft_atoi(const char *str)
 {
-	int	i;
-	int	j;
+	int				i;
+	int				j;
 	long long int	res;
 
 	i = 0;

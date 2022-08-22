@@ -12,38 +12,42 @@
 
 #include "push_swap.h"
 
-void	sa(t_all *all)// swap top of stack a
+void	sa(t_all **a, int t)
 {
-	if (all->a.load >= 2)
-		ft_swap(&all->a.stk[TOP_A], &all->a.stk[TOP_A - 1]);
+	ft_for_swap(a);
+	if (t == 1)
+		ft_printf("sa\n");
 }
 
-void	sb(t_all *all)// swap top of stack b
+void	sb(t_all **b, int t)
 {
-	if (all->b.load >= 2)
-		ft_swap(&all->b.stk[TOP_B], &all->b.stk[TOP_B - 1]);
+	ft_for_swap(b);
+	if (t == 1)
+		ft_printf("sb\n");
 }
 
-void	ss(t_all *all)// swap both stacks tops
+void	ss(t_all **a, t_all **b, int t)
 {
-	sa(all);
-	sb(all);
+	ft_for_swap(a);
+	ft_for_swap(b);
+	if (t == 1)
+		ft_printf("ss\n");
 }
 
-void	pa(t_all *all)// push top of b to a
+void	pa(t_all **a, t_all **b, int t)
 {
-	if (!all->b.load)
+	if (b == NULL)
 		return ;
-	all->a.load++;
-	all->a.stk[TOP_A] = all->b.stk[TOP_B];
-	all->b.load--;
+	ft_for_push(b, a);
+	if (t == 1)
+		ft_printf("pa\n");
 }
 
-void	pb(t_all *all)// push a summit on top of b
+void	pb(t_all **a, t_all **b, int t)
 {
-	if (!all->a.load)
+	if (a == NULL)
 		return ;
-	all->b.load++;
-	all->b.stk[TOP_B] = all->a.stk[TOP_A];
-	all->a.load--;
+	ft_for_push(a, b);
+	if (t == 1)
+		ft_printf("pb\n");
 }

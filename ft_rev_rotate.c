@@ -11,36 +11,54 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//push bottom up the top of the stack - shift remaining values down the stack
-static void	rot_stk_botm_to_top(t_val *stk, size_t top)
-{
-	t_val	botm;
-	size_t	i;
 
-	botm = stk[0];
-	i = 0;
-	while (i < top)
+static void	ft_for_rev_rotate(t_all **stk)
+{
+	t_all	*temp;
+	t_all	*first;
+
+	first = *stk;
+	temp = *stk;
+	if (stk)
 	{
-		stk[i] = stk[i + 1];
-		i++;
+		while (temp -> next -> next)
+			temp = temp -> next;
+		temp -> next -> next = first;
+		*stk = temp -> next;
+		temp -> next = NULL;
 	}
-	stk[top] = botm;
 }
 
-void	rra(t_all *all)
+void	rra(t_all **a, int t)
 {
-	if (all->a.load >= 2)
-		rot_stk_botm_to_top(all->a.stk, TOP_A);
+	ft_for_rev_rotate(a);
+	if (t == 1)
+		ft_printf("rra\n");
 }
 
-void	rrb(t_all *all)
+void	rrb(t_all **b, int t)
 {
-	if (all->b.load >= 2)
-		rot_stk_botm_to_top(all->b.stk, TOP_B);
+	ft_for_rev_rotate(b);
+	if (t == 1)
+		ft_printf("rrb\n");
 }
 
-void	rrr(t_all *all)
+void	rrr(t_all **a, t_all **b, int t)
 {
-	rra(all);
-	rrb(all);
+	ft_for_rev_rotate(a);
+	ft_for_rev_rotate(b);
+	if (t == 1)
+		ft_printf("rrr\n");
+}
+
+void	ft_for_push(t_all **a, t_all **b)
+{
+	t_all	*i;
+
+	i = *a;
+	*a = (*a)->next;
+	if (i == NULL)
+		return ;
+	i->next = *a;
+	*a = i;
 }
