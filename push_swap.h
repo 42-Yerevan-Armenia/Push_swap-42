@@ -22,23 +22,24 @@
 
 typedef struct s_all
 {
-	int				info;
 	int				index;
 	int				content;
 	struct s_all	*next;
 }				t_all;
 
+t_all			*ft_lstnew(int content);
+int				ft_lstsize(t_all *head);
+void			ft_free(char **str);
+void			ft_lstadd_back(t_all **lst, t_all *new);
+
 //PARSING ⚙️
 void			ft_error(char *str);
-char			**join_and_split(char **av);
-t_all			*fill_stack_a(int ac, char **av);
+void			check_args(int ac, char **av);
+t_all			*fill_stack_a(int ac, char **av, t_all **a);
 
 //CHECK ✅
 void			ft_for_swap(t_all **swap);
 void			ft_for_push(t_all **a, t_all **b);
-int				alpha(char *str);
-int				min_max(long long int num);
-int				doubles(char **array, char *str, int pos);
 
 //LIBFT 📚
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);

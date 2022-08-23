@@ -14,14 +14,14 @@
 
 t_all	*ft_lstnew(int content)
 {
-	t_all	*head;
+	t_all	*new;
 
-	head = (t_all *)malloc(sizeof(t_all));
-	if (head == NULL)
+	new = (t_all *)malloc(sizeof(t_all));
+	if (new == NULL)
 		return (0);
-	head->content = content;
-	head->next = NULL;
-	return (head);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }
 
 t_all	*ft_lstlast(t_all *lst)
@@ -33,18 +33,19 @@ t_all	*ft_lstlast(t_all *lst)
 	return (lst);
 }
 
-t_all	*ft_lstadd_back(t_all *lst, t_all *new)
+void	ft_lstadd_back(t_all **lst, t_all *new)
 {
 	t_all	*current;
 
-	if (!lst)
+	if (!new)
+		return ;
+	if (!*lst)
 	{
-		lst = new;
-		return (lst);
+		*lst = new;
+		return ;
 	}
-	current = ft_lstlast(lst);
+	current = ft_lstlast(*lst);
 	current->next = new;
-	return (lst);
 }
 
 int	ft_lstsize(t_all *lst)
@@ -62,36 +63,30 @@ int	ft_lstsize(t_all *lst)
 	return (count);
 }
 
-//void	list()
-
-t_all	*fill_stack_a(int ac, char **av)
+t_all	*fill_stack_a(int ac, char **av, t_all **a)
 {
-	t_all	*a;
 	t_all	*new;
 	int		i;
 	int		j;
 	int		found;
 
-	i = 1;
-	a = 0;
+	i = 0;
 	new = 0;
-	while (i < ac)
+	while (++i < ac)
 	{
-		j = 0;
+		j = -1;
 		found = 0;
-		while (av[i][j])
+		while (av[i][++j])
 		{
 			if (av[i][j] != ' ' && found == 0)
 			{
 				new = ft_lstnew(ft_atoi(&av[i][j]));
-				a = ft_lstadd_back(a, new);
+				 ft_lstadd_back(a, new);
 				found = 1;
 			}
 			else if (av[i][j] == ' ' )
 				found = 0;
-			j++;
 		}
-		i++;
 	}
-	return (a);
+	return (*a);
 }

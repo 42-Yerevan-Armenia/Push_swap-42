@@ -53,8 +53,8 @@ void	ft_for_swap(t_all **swap)
 
 	if (swap)
 	{
-		i = (*swap)->info;
-		(*swap)->info = (*swap)->next->info;
-		(*swap)->next->info = i;
+		i = (*swap)->content;
+		(*swap)->content = (*swap)->next->content;
+		(*swap)->next->content = i;
 	}
 }

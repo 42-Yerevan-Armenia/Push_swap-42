@@ -37,18 +37,36 @@ void	ft_free_stack(t_all **stk)
 	free(stk);
 }
 
+int	is_sorted(t_all *a)
+{
+	while (a->next)
+	{
+		if (a->content > a->next->content)
+			return (0);
+		a = a->next;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_all	**a;
+	t_all	**b;
 	t_all	*fill;
-	char	**split;
 
 	if (ac < 2)
-		ft_error("❌ No Valid Argument❗️ \n➡️ ./push_swap 1 2 ...");
-	split = join_and_split(av);
+		return (-1);
+	check_args(ac, av);
 	a = (t_all **)malloc(sizeof(t_all *));
+	b = (t_all **)malloc(sizeof(t_all *));
 	*a = NULL;
-	fill = fill_stack_a(ac, av);
+	*b = NULL;
+	fill = fill_stack_a(ac, av, a);
+	if (is_sorted(*a))
+	{
+		return (0);
+	}
+	//ft_printf("%d\n", __LINE__);
 	while (fill)
 	{
 		ft_printf("%d\n", fill->content);
