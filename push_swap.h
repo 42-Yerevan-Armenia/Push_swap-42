@@ -27,31 +27,32 @@ typedef struct s_all
 	struct s_all	*next;
 }				t_all;
 
-t_all			*ft_lstnew(int content);
-int				ft_lstsize(t_all *head);
-void			ft_free(char **str);
-void			ft_lstadd_back(t_all **lst, t_all *new);
-
 //PARSING ⚙️
+void			ft_free(char **str);
 void			ft_error(char *str);
 void			check_args(int ac, char **av);
-t_all			*fill_stack_a(int ac, char **av, t_all **a);
+void			ft_fill_stack(t_all **a, int ac, char **av);
 
 //CHECK ✅
+void			simple_sort(t_all **a, t_all **b);
+void			radix_sort(t_all **a, t_all **b);
 void			ft_for_swap(t_all **swap);
-void			ft_for_push(t_all **a, t_all **b);
+int				ft_for_push(t_all **sa, t_all **b);
+int				is_sorted(t_all **a);
 
 //LIBFT 📚
-size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *str);
+size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+void			ft_lstadd_back(t_all **lst, t_all *new);
 t_all			*ft_lstlast(t_all *lst);
+t_all			*ft_lstnew(int content);
+int				ft_lstsize(t_all *head);
 int				ft_strncmp(const char *s1, const char *s2, unsigned int n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char const *s2);
 char			**ft_split(char const *s, char c);
 char			*ft_strdup(const char *s1);
 char			*ft_itoa(int n);
-
 long long int	ft_atoi(const char *str);
 
 //PRINTF 🖨
@@ -67,8 +68,8 @@ void			sa(t_all **a, int t);
 void			sb(t_all **b, int t);
 void			ss(t_all **a, t_all **b, int t);
 
-void			pa(t_all **a, t_all **b, int t);
-void			pb(t_all **a, t_all **b, int t);
+int				pa(t_all **a, t_all **b);
+int				pb(t_all **a, t_all **b);
 
 void			ra(t_all **a, int t);
 void			rb(t_all **b, int t);

@@ -34,20 +34,18 @@ void	ss(t_all **a, t_all **b, int t)
 		ft_printf("ss\n");
 }
 
-void	pa(t_all **a, t_all **b, int t)
+int	pa(t_all **a, t_all **b)
 {
-	if (b == NULL)
-		return ;
-	ft_for_push(b, a);
-	if (t == 1)
-		ft_printf("pa\n");
+	if (push(a, b) == -1)
+		return (-1);
+	ft_printf("pa\n");
+	return (0);
 }
 
-void	pb(t_all **a, t_all **b, int t)
+int	pb(t_all **a, t_all **b)
 {
-	if (a == NULL)
-		return ;
-	ft_for_push(a, b);
-	if (t == 1)
-		ft_printf("pb\n");
+	if (push(b, a) == -1)
+		return (-1);
+	ft_printf("pb\n");
+	return (0);
 }

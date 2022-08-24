@@ -31,28 +31,38 @@ void	ft_free_stack(t_all **stk)
 	while (tmp)
 	{
 		front = tmp;
-		tmp = tmp -> next;
+		tmp = tmp->next;
 		free(front);
 	}
 	free(stk);
 }
 
-int	is_sorted(t_all *a)
+int	is_sorted(t_all **a)
 {
-	while (a->next)
+	t_all	*head;
+
+	head = *a;
+	while (head && head->next)
 	{
-		if (a->content > a->next->content)
+		if (head->content > head->next->content)
 			return (0);
-		a = a->next;
+		head = head->next;
 	}
 	return (1);
+}
+
+static void	sort_stack(t_all **a, t_all **b)
+{
+	if (ft_lstsize(*a) <= 5)
+		simple_sort(a, b);
+	else
+		radix_sort(a, b);
 }
 
 int	main(int ac, char **av)
 {
 	t_all	**a;
 	t_all	**b;
-	t_all	*fill;
 
 	if (ac < 2)
 		return (-1);
@@ -61,16 +71,15 @@ int	main(int ac, char **av)
 	b = (t_all **)malloc(sizeof(t_all *));
 	*a = NULL;
 	*b = NULL;
-	fill = fill_stack_a(ac, av, a);
-	if (is_sorted(*a))
+	ft_fill_stack(a, ac, av);
+	if (is_sorted(a))
 	{
+		ft_free_stack(a);
+		ft_free_stack(b);
 		return (0);
 	}
-	//ft_printf("%d\n", __LINE__);
-	while (fill)
-	{
-		ft_printf("%d\n", fill->content);
-		fill = fill->next;
-	}
+	sort_stack(a, b);
+	ft_free_stack(a);
+	ft_free_stack(b);
 	return (0);
 }

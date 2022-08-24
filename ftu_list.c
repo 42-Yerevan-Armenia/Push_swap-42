@@ -16,10 +16,11 @@ t_all	*ft_lstnew(int content)
 {
 	t_all	*new;
 
-	new = (t_all *)malloc(sizeof(t_all));
-	if (new == NULL)
-		return (0);
+	new = (t_all *)malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
 	new->content = content;
+	new->index = -1;
 	new->next = NULL;
 	return (new);
 }
@@ -61,32 +62,4 @@ int	ft_lstsize(t_all *lst)
 		count++;
 	}
 	return (count);
-}
-
-t_all	*fill_stack_a(int ac, char **av, t_all **a)
-{
-	t_all	*new;
-	int		i;
-	int		j;
-	int		found;
-
-	i = 0;
-	new = 0;
-	while (++i < ac)
-	{
-		j = -1;
-		found = 0;
-		while (av[i][++j])
-		{
-			if (av[i][j] != ' ' && found == 0)
-			{
-				new = ft_lstnew(ft_atoi(&av[i][j]));
-				 ft_lstadd_back(a, new);
-				found = 1;
-			}
-			else if (av[i][j] == ' ' )
-				found = 0;
-		}
-	}
-	return (*a);
 }
