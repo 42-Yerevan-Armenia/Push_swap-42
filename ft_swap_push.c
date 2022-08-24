@@ -36,7 +36,7 @@ void	ss(t_all **a, t_all **b, int t)
 
 int	pa(t_all **a, t_all **b)
 {
-	if (push(a, b) == -1)
+	if (ft_for_push(a, b) == -1)
 		return (-1);
 	ft_printf("pa\n");
 	return (0);
@@ -44,7 +44,7 @@ int	pa(t_all **a, t_all **b)
 
 int	pb(t_all **a, t_all **b)
 {
-	if (push(b, a) == -1)
+	if (ft_for_push(b, a) == -1)
 		return (-1);
 	ft_printf("pb\n");
 	return (0);

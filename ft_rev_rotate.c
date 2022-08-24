@@ -51,7 +51,7 @@ void	rrr(t_all **a, t_all **b, int t)
 		ft_printf("rrr\n");
 }
 
-int	ft_for_push(t_all **sa, t_all **b)
+int	ft_for_push(t_all **a, t_all **b)
 {
 	t_all	*tmp;
 	t_all	*h_a;
