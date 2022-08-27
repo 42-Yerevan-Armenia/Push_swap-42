@@ -47,14 +47,14 @@ void	rr(t_all **a, t_all **b, int t)
 		ft_printf("rr\n");
 }
 
-void	ft_for_swap(t_all **swap)
+void	ft_for_swap(t_all **stack)
 {
 	int	i;
 
-	if (swap)
+	if (stack)
 	{
-		i = (*swap)->content;
-		(*swap)->content = (*swap)->next->content;
-		(*swap)->next->content = i;
+		i = (*stack)->content;
+		(*stack)->content = (*stack)->next->content;
+		(*stack)->next->content = i;
 	}
 }

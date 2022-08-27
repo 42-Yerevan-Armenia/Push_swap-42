@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arakhurs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 16:13:48 by arakhurs          #+#    #+#             */
+/*   Created: 2022/08/08 16:13:50 by arakhurs          #+#    #+#             */
 /*   Updated: 2022/08/08 16:13:51 by arakhurs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -80,6 +80,8 @@ long long int	ft_atoi(const char *str)
 		res = (str[i] - '0') + (res * 10);
 		i++;
 	}
+	if (res < -2147483648 || res > 2147483647)
+		ft_error("❌ MAX int");
 	return (res * j);
 }
 

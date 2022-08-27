@@ -23,12 +23,15 @@ void	ft_free(char **str)
 		free(str[i--]);
 }
 
-static int	ft_doubles(int num, char **av, int i)
+static int	doubles(char **av, int i)//Repair it
 {
+	int	n;
+
 	i++;
 	while (av[i])
 	{
-		if (ft_atoi(av[i]) == num)
+		n = ft_atoi(av[i]);
+		if (ft_atoi(av[i]) == n)
 			return (1);
 		i++;
 	}
@@ -40,7 +43,7 @@ int	alpha(char *str)
 	int	i;
 
 	i = 0;
-	if (str[0] == '-')
+	if (str[0] == '-' || str[0] == '+')
 		i++;
 	while (str[i])
 	{
@@ -51,38 +54,44 @@ int	alpha(char *str)
 	return (1);
 }
 
-void	checks(char **args)
+void	checks(char **args, int i)
 {
+//	if (doubles(args, i))
+//		ft_error("❌ Doubles❗️");
 	if (!alpha(*args))
-		ft_error("❌ Not Digit");
+		ft_error("❌ Not Digit❗️");
 	if (ft_strlen(*args) > 10)
 		ft_error("❌ MAX LONG LONG Error❗️");
 }
 
-void	check_args(int ac, char **av)
+char	**check_args(int ac, char **av)
 {
 	int		i;
-	long	tmp;
-	char	**args;
+	int		n;
+	char	*args;
+	char	**split;
 
-	i = 0;
-	if (ac == 2)
-		args = ft_split(av[1], ' ');
-	else
+	i = 1;
+	while (av[i])
 	{
-		i = 1;
-		args = av;
-	}
-	while (args[i])
-	{
-		tmp = ft_atoi(args[i]);
-		checks(&args[i]);
-		if (ft_doubles(tmp, args, i))
-			ft_error("❌ Doubles");
-		if (tmp < -2147483648 || tmp > 2147483647)
-			ft_error("❌ MAX int");
+		if (!args)
+			args = ft_strdup(av[i]);
+		else
+		{
+			args = ft_strjoin(args, " ");
+			args = ft_strjoin(args, av[i]);
+		}
 		i++;
 	}
-	if (ac == 2)
-		ft_free(args);
+	i = -1;
+	split = ft_split(args, ' ');
+	while (split[++i])
+		checks(&split[i], i);
+	free(args);
+	while (split[i])
+	{
+		n = ft_atoi(split[i]);
+		i++;
+	}
+	return (split);
 }

@@ -31,22 +31,22 @@ int	lenght_of_max(t_all **a)
 
 t_all	*next_min(t_all *a)
 {
-	int		first;
+	int		head;
 	t_all	*node;
 	t_all	*min_node;
 
 	min_node = NULL;
-	first = 0;
+	head = 0;
 	node = a;
 	while (node)
-	{
-		if (node -> index == -1 && (first == 0
-				|| node -> content < min_node -> content))
+	{//if not exist
+		if (node->index == -1 && (head == 0
+				|| node->content < min_node->content))
 		{
-			first = 1;
+			head = 1;
 			min_node = node;
 		}
-		node = node -> next;
+		node = node->next;
 	}
 	return (min_node);
 }

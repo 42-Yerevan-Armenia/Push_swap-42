@@ -15,17 +15,17 @@
 static void	ft_for_rev_rotate(t_all **stk)
 {
 	t_all	*temp;
-	t_all	*first;
+	t_all	*head;
 
-	first = *stk;
+	head = *stk;
 	temp = *stk;
 	if (stk)
 	{
-		while (temp -> next -> next)
-			temp = temp -> next;
-		temp -> next -> next = first;
-		*stk = temp -> next;
-		temp -> next = NULL;
+		while (temp ->next->next)
+			temp = temp->next;
+		temp->next->next = head;
+		*stk = temp->next;
+		temp->next = NULL;
 	}
 }
 

@@ -16,20 +16,20 @@ static t_all	*get_next_min(t_all **stack)
 {
 	t_all	*head;
 	t_all	*min;
-	int		has_min;
+	int		head_min;
 
 	min = NULL;
-	has_min = 0;
+	head_min = 0;
 	head = *stack;
 	if (head)
 	{
 		while (head)
 		{
-			if ((head->index == -1) && (!has_min \
+			if ((head->index == -1) && (!head_min \
 				|| head->content < min->content))
 			{
 				min = head;
-				has_min = 1;
+				head_min = 1;
 			}
 			head = head->next;
 		}
@@ -51,27 +51,19 @@ void	index_stack(t_all **stack)
 	}
 }
 
-void	ft_fill_stack(t_all **a, int ac, char **av)
+void	ft_fill_stack(t_all **a, int ac, char **split)
 {
 	t_all	*new;
-	char	**args;
 	int		i;
 
 	i = 0;
-	if (ac == 2)
-		args = ft_split(av[1], ' ');
-	else
+	while (split[i])
 	{
-		i = 1;
-		args = av;
-	}
-	while (args[i])
-	{
-		new = ft_lstnew(ft_atoi(args[i]));
+		new = ft_lstnew(ft_atoi(split[i]));
 		ft_lstadd_back(a, new);
 		i++;
 	}
 	index_stack(a);
 	if (ac == 2)
-		ft_free(args);
+		ft_free(split);
 }

@@ -24,15 +24,15 @@ void	ft_error(char *str)
 
 void	ft_free_stack(t_all **stk)
 {
-	t_all	*front;
+	t_all	*head;
 	t_all	*tmp;
 
 	tmp = *stk;
 	while (tmp)
 	{
-		front = tmp;
+		head = tmp;
 		tmp = tmp->next;
-		free(front);
+		free(head);
 	}
 	free(stk);
 }
@@ -42,8 +42,8 @@ int	is_sorted(t_all **a)
 	t_all	*head;
 
 	head = *a;
-	while (head && head->next)
-	{
+	while (head && head->next)//if node and next exist
+	{//check if node_1 > node_2, node_2 > node_3 ... till end
 		if (head->content > head->next->content)
 			return (0);
 		head = head->next;
@@ -54,7 +54,7 @@ int	is_sorted(t_all **a)
 static void	sort_stack(t_all **a, t_all **b)
 {
 	if (ft_lstsize(*a) <= 5)
-		simple_sort(a, b);
+		simple_sort(a, b);//sorter till 5 av
 	else
 		radix_sort(a, b);
 }
@@ -63,20 +63,21 @@ int	main(int ac, char **av)
 {
 	t_all	**a;
 	t_all	**b;
+	char	**split;
 
 	if (ac < 2)
 		return (-1);
-	check_args(ac, av);
-	a = (t_all **)malloc(sizeof(t_all *));
-	b = (t_all **)malloc(sizeof(t_all *));
+	split = check_args(ac, av);
+	a = (t_all **)malloc(sizeof(t_all *));//new space
+	b = (t_all **)malloc(sizeof(t_all *));//new space
 	*a = NULL;
 	*b = NULL;
-	ft_fill_stack(a, ac, av);
-	if (is_sorted(a))
+	ft_fill_stack(a, ac, split);
+	if (is_sorted(a))//check if stack A is sorted
 	{
 		ft_free_stack(a);
 		ft_free_stack(b);
-		return (0);
+		return (0);//Exit
 	}
 	sort_stack(a, b);
 	ft_free_stack(a);

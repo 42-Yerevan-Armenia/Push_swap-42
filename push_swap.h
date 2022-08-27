@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arakhurs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/10 20:30:49 by arakhurs          #+#    #+#             */
+/*   Created: 2022/08/10 20:30:50 by arakhurs          #+#    #+#             */
 /*   Updated: 2022/08/10 20:30:51 by arakhurs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -30,7 +30,8 @@ typedef struct s_all
 //PARSING ⚙️
 void			ft_free(char **str);
 void			ft_error(char *str);
-void			check_args(int ac, char **av);
+void			checks(char **args, int i);
+char			**check_args(int ac, char **av);
 void			ft_fill_stack(t_all **a, int ac, char **av);
 
 //CHECK ✅

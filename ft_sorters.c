@@ -35,22 +35,22 @@ int	index_of_min(t_all *a)
 }
 
 void	sort_3(t_all **a)
-{
+{//if 1 2 0 -> 1<2
 	if ((*a)->content < (*a)->next->content)
 	{
-		rra(a, 1);
+		rra(a, 1);//0 1 2
 		if (is_sorted(a) == 0)
 			sa(a, 1);
-	}
+	}//if 2 1 3 -> 2 > 1 || 2 1 0 -> 2 > 0
 	else if ((*a)->content > (*a)->next->content)
-	{
-		if ((*a)->content < (*a)->next -> next->content)
-			sa(a, 1);
+	{//if 2 1 3 -> 2 < 3 || 2 1 0 -> 2 < 0
+		if ((*a)->content < (*a)->next->next->content)
+			sa(a, 1);// 1 2 3
 		else
 		{
-			ra(a, 1);
+			ra(a, 1);//1 0 2
 			if (!is_sorted(a))
-				sa(a, 1);
+				sa(a, 1);//0 1 2
 		}
 	}
 }
@@ -58,22 +58,22 @@ void	sort_3(t_all **a)
 void	sort_4(t_all **a, t_all **b)
 {
 	int	i;
-
+//search min index in array of av
 	i = index_of_min(*a);
-	if (i == 1)
-		sa(a, 1);
-	else if (i == 2)
+	if (i == 1)//1 0 2 3
+		sa(a, 1);//0 1 2 3
+	else if (i == 2)//3 2 0 1
 	{
-		rra(a, 1);
-		rra(a, 1);
+		rra(a, 1);//2 0 1 3
+		rra(a, 1);//0 1 2 3
 	}
-	else if (i == 3)
-		rra(a, 1);
+	else if (i == 3)//1 2 3 0 || 3 2 1 0
+		rra(a, 1);//0 1 2 3
 	if (is_sorted(a))
 		return ;
-	pb(a, b);
-	sort_3(a);
-	pa(a, b);
+	pb(a, b);//2 1 0 --> 3
+	sort_3(a);//0 1 2
+	pa(a, b);//0 1 2 3
 }
 
 void	sort_5(t_all **a, t_all **b)
@@ -81,25 +81,25 @@ void	sort_5(t_all **a, t_all **b)
 	int	i;
 
 	i = index_of_min(*a);
-	if (i == 1)
-		sa(a, 1);
-	else if (i == 2)
+	if (i == 1)//1 0 2 3 4
+		sa(a, 1);//0 1 2 3 4
+	else if (i == 2)//3 4 0 1 2 
 	{
-		ra(a, 1);
-		ra(a, 1);
+		ra(a, 1);//4 0 1 2 3
+		ra(a, 1);//0 1 2 3 4
 	}
-	else if (i == 3)
+	else if (i == 3)//2 3 4 0 1
 	{
-		rra(a, 1);
-		rra(a, 1);
+		rra(a, 1);//1 2 3 4 0
+		rra(a, 1);//0 1 2 3 4
 	}
-	else if (i == 4)
-		rra(a, 1);
+	else if (i == 4)//1 2 3 4 0
+		rra(a, 1);//0 1 2 3 4
 	if (is_sorted(a))
 		return ;
-	pb(a, b);
-	sort_4(a, b);
-	pa(a, b);
+	pb(a, b);//3 2 1 0 --> 4
+	sort_4(a, b);//0 1 2 3
+	pa(a, b);//0 1 2 3 4
 }
 
 void	simple_sort(t_all **a, t_all **b)
