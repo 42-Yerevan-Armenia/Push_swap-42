@@ -30,7 +30,7 @@ typedef struct s_all
 //PARSING ⚙️
 void			ft_free(char **str);
 void			ft_error(char *str);
-void			checks(char **args, int i);
+void			checks(char **args);
 char			**check_args(int ac, char **av);
 void			ft_fill_stack(t_all **a, int ac, char **av);
 
@@ -48,6 +48,7 @@ void			ft_lstadd_back(t_all **lst, t_all *new);
 t_all			*ft_lstlast(t_all *lst);
 t_all			*ft_lstnew(int content);
 int				ft_lstsize(t_all *head);
+int				ft_strcmp(char *s1, char *s2);
 int				ft_strncmp(const char *s1, const char *s2, unsigned int n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char const *s2);

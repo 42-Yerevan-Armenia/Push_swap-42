@@ -67,3 +67,24 @@ void	ft_fill_stack(t_all **a, int ac, char **split)
 	if (ac == 2)
 		ft_free(split);
 }
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+		free(str[i--]);
+}

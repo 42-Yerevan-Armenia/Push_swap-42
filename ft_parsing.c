@@ -12,55 +12,58 @@
 
 #include "push_swap.h"
 
-void	ft_free(char **str)
+int	doubles(char **av)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (str[i])
-		i++;
-	while (i >= 0)
-		free(str[i--]);
-}
-
-static int	doubles(char **av, int i)//Repair it
-{
-	int	n;
-
-	i++;
 	while (av[i])
 	{
-		n = ft_atoi(av[i]);
-		if (ft_atoi(av[i]) == n)
-			return (1);
+		j = i + 1;
+		while (av[j])
+		{
+			if (ft_atoi(av[i]) == ft_atoi(av[j]))
+				return (1);
+			j++;
+		}
 		i++;
 	}
 	return (0);
 }
 
-int	alpha(char *str)
+int	alpha(char **str)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (str[0] == '-' || str[0] == '+')
-		i++;
 	while (str[i])
 	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
+		j = 1;
+		if (ft_strcmp(str[i], "+") == 0 || ft_strcmp(str[i], "-") == 0)
 			return (0);
+		if (str[i][0] != '-' && str[i][0] != '+' &&
+			!(str[i][0] >= '0' && str[i][0] <= '9'))
+			return (0);
+		while (str[i][j])
+		{
+			if (!(str[i][j] >= '0' && str[i][j] <= '9'))
+				return (0);
+			j++;
+		}
 		i++;
 	}
 	return (1);
 }
 
-void	checks(char **args, int i)
+void	checks(char **split)
 {
-//	if (doubles(args, i))
-//		ft_error("❌ Doubles❗️");
-	if (!alpha(*args))
+	if (doubles(split))
+		ft_error("❌ Doubles❗️");
+	if (!alpha(split))
 		ft_error("❌ Not Digit❗️");
-	if (ft_strlen(*args) > 10)
+	if (ft_strlen(*split) > 10)
 		ft_error("❌ MAX LONG LONG Error❗️");
 }
 
@@ -71,8 +74,8 @@ char	**check_args(int ac, char **av)
 	char	*args;
 	char	**split;
 
-	i = 1;
-	while (av[i])
+	i = 0;
+	while (av[++i])
 	{
 		if (!args)
 			args = ft_strdup(av[i]);
@@ -81,17 +84,14 @@ char	**check_args(int ac, char **av)
 			args = ft_strjoin(args, " ");
 			args = ft_strjoin(args, av[i]);
 		}
-		i++;
 	}
-	i = -1;
 	split = ft_split(args, ' ');
-	while (split[++i])
-		checks(&split[i], i);
 	free(args);
-	while (split[i])
-	{
-		n = ft_atoi(split[i]);
-		i++;
-	}
+	i = -1;
+	while (split[++i])
+		checks(split);
+	i = -1;
+	while (split[++i])
+		ft_atoi(split[i]);
 	return (split);
 }
