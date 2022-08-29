@@ -56,7 +56,7 @@ static void	sort_stack(t_all **a, t_all **b)
 	if (ft_lstsize(*a) <= 5)
 		simple_sort(a, b);//sorter till 5 av
 	else
-		radix_sort(a, b);
+		radix_sort(a, b);//algoritm
 }
 
 int	main(int ac, char **av)

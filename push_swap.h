@@ -13,11 +13,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <fcntl.h>
 # include <stdio.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
 
 typedef struct s_all
@@ -37,6 +35,7 @@ void			ft_fill_stack(t_all **a, int ac, char **av);
 //CHECK ✅
 void			simple_sort(t_all **a, t_all **b);
 void			radix_sort(t_all **a, t_all **b);
+void			index_stack(t_all **a);
 void			ft_for_swap(t_all **swap);
 int				ft_for_push(t_all **sa, t_all **b);
 int				is_sorted(t_all **a);
@@ -82,8 +81,6 @@ void			rrb(t_all **b, int t);
 void			rrr(t_all **a, t_all **b, int t);
 
 /*
-read, write, malloc, free, exit
-
 sa (swap a): Swap the first 2 elements at the top of stack a.
 Do nothing if there is only one or no elements.
 sb (swap b): Swap the first 2 elements at the top of stack b.

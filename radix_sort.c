@@ -12,6 +12,17 @@
 
 #include "push_swap.h"
 
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+		free(str[i--]);
+}
+
 int	lenght_of_max(t_all **a)
 {
 	int	max;
@@ -39,7 +50,7 @@ t_all	*next_min(t_all *a)
 	head = 0;
 	node = a;
 	while (node)
-	{//if not exist
+	{
 		if (node->index == -1 && (head == 0
 				|| node->content < min_node->content))
 		{
@@ -51,18 +62,17 @@ t_all	*next_min(t_all *a)
 	return (min_node);
 }
 
-void	indexing(t_all **a)
+void	index_stack(t_all **a)
 {
-	t_all	*top;
+	t_all	*head;
 	int		index;
 
 	index = 0;
-	top = next_min(*a);
-	while (top)
+	head = next_min(*a);
+	while (head)
 	{
-		top -> index = index;
-		index++;
-		top = next_min(*a);
+		head->index = index++;
+		head = next_min(*a);
 	}
 }
 
@@ -74,21 +84,21 @@ void	radix_sort(t_all **a, t_all **b)
 	int		max_index_lenght;
 
 	i = 0;
-	size = ft_lstsize(*a);
-	indexing(a);
+	size = ft_lstsize(*a);//take size of stack
+	index_stack(a);
 	max_index_lenght = lenght_of_max(a);
 	while (i < max_index_lenght)
-	{
+	{//cycle for index
 		j = 0;
 		while (j < size)
-		{
-			if ((((*a)->index >> i) & 1) == 1)
+		{//cycle for stack
+			if ((((*a)->index >> i) & 1) == 1)//>> 1 -> index / (2^i), & 1 -> check bit
 				ra(a, 1);
 			else
 				pb(a, b);
 			j++;
 		}
-		while (ft_lstsize(*b))
+		while (ft_lstsize(*b))//return all to stack
 			pa(a, b);
 		i++;
 	}
