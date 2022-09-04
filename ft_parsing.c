@@ -12,31 +12,6 @@
 
 #include "push_swap.h"
 
-int	alpha(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (str[i])
-	{
-		j = 1;//check for - and + in front of number
-		if (ft_strcmp(str[i], "-") == 0 || ft_strcmp(str[i], "+") == 0)
-			return (0);
-		if (str[i][0] != '-' && str[i][0] != '+' &&
-			!(str[i][0] >= '0' && str[i][0] <= '9'))
-			return (0);
-		while (str[i][j])
-		{
-			if (!(str[i][j] >= '0' && str[i][j] <= '9'))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
 int	doubles(char **av)
 {
 	int	i;
@@ -47,7 +22,7 @@ int	doubles(char **av)
 	{
 		j = i + 1;
 		while (av[j])
-		{//check av[i] for all av cycling with av[j]
+		{
 			if (ft_atoi(av[i]) == ft_atoi(av[j]))
 				return (1);
 			j++;
@@ -57,14 +32,28 @@ int	doubles(char **av)
 	return (0);
 }
 
-void	checks(char **split)
+void	ft_free_1(char **str)
 {
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+		free(str[i--]);
+	ft_error("❌ Error");
+}
+
+void	while_1(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[++i])
+		if (ft_strlen(split[i]) == 1 && (split[i][0] == '+' || split[i][0] == '-'))
+			ft_free_1(split);
 	if (doubles(split))
-		ft_error("❌ Doubles❗️");
-	if (!alpha(split))
-		ft_error("❌ Not Digit❗️");
-	if (ft_strlen(*split) > 10)
-		ft_error("❌ MAX LONG LONG Error❗️");
+		ft_error("❌ Error");
 }
 
 char	**check_args(int ac, char **av)
@@ -77,18 +66,18 @@ char	**check_args(int ac, char **av)
 	i = 0;
 	while (av[++i])
 	{
-		if (!args)//for first
+		if (!args)//for first av
 			args = ft_strdup(av[i]);
 		else
-		{//join " " then av[i]
+		{//join ospace and next av
 			args = ft_strjoin(args, " ");
 			args = ft_strjoin(args, av[i]);
 		}
-	}//split all " "es
+	}
 	split = ft_split(args, ' ');
-	free(args);//free memory
+	free(args);
 	i = -1;
-	while (split[++i])//check errors
+	while (split[++i])
 		checks(split);
 	i = -1;
 	while (split[++i])
@@ -103,7 +92,7 @@ void	ft_fill_stack(t_all **a, int ac, char **split)
 
 	i = 0;
 	while (split[i])
-	{//put in lists splited av
+	{//each av add to list
 		new = ft_lstnew(ft_atoi(split[i]));
 		ft_lstadd_back(a, new);
 		i++;
@@ -111,3 +100,4 @@ void	ft_fill_stack(t_all **a, int ac, char **split)
 	if (ac == 2)
 		ft_free(split);
 }
+

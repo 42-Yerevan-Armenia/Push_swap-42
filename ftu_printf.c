@@ -80,8 +80,6 @@ long long int	ft_atoi(const char *str)
 		res = (str[i] - '0') + (res * 10);
 		i++;
 	}
-	if (res < -2147483648 || res > 2147483647)
-		ft_error("❌ MAX int");
 	return (res * j);
 }
 

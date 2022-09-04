@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	while (i >= 0)
-		free(str[i--]);
-}
-
 int	lenght_of_max(t_all **a)
 {
 	int	max;
@@ -103,3 +92,15 @@ void	radix_sort(t_all **a, t_all **b)
 		i++;
 	}
 }
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+		free(str[i--]);
+}
+

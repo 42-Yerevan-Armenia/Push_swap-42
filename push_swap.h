@@ -26,11 +26,14 @@ typedef struct s_all
 }				t_all;
 
 //PARSING ⚙️
+void			while_1(char **split);
+int				doubles(char **av);
 void			ft_free(char **str);
+void			ft_free_1(char **str);
 void			ft_error(char *str);
-void			checks(char **args);
-char			**check_args(int ac, char **av);
 void			ft_fill_stack(t_all **a, int ac, char **av);
+char			**checks(char **split);
+char			**check_args(int ac, char **av);
 
 //CHECK ✅
 void			simple_sort(t_all **a, t_all **b);
