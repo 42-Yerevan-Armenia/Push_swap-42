@@ -81,7 +81,7 @@ void	radix_sort(t_all **a, t_all **b)
 		j = 0;
 		while (j < size)
 		{//cycle for stack
-			if ((((*a)->index >> i) & 1) == 1)//>> 1 -> index / (2^i), & 1 -> check bit
+			if ((((*a)->index >> i) & 1) == 1)//>> 1 -> shift 1 bit, & 1 -> check bit, == 1 -> if 0 == 1 pb, 1 == 1 ra
 				ra(a, 1);
 			else
 				pb(a, b);
