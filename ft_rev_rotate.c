@@ -21,7 +21,7 @@ static void	ft_for_rev_rotate(t_all **stk)
 	temp = *stk;
 	if (stk)
 	{
-		while (temp ->next->next)
+		while (temp->next->next)
 			temp = temp->next;
 		temp->next->next = head;
 		*stk = temp->next;
