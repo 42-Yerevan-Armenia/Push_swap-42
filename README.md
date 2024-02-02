@@ -1,7 +1,7 @@
 # Push_swap-42
 ## Algorithmic project
 
-![pushswap](https://user-images.githubusercontent.com/6814254/39968014-7caf603a-56c6-11e8-8859-6231562d3ae8.gif)
+![pushswap](https://github.com/Aramxxx8691/Git_Images/blob/master/push_swap.gif)
 
 
 The main goal is to sort data on a stack, with a limited set of instructions, using
